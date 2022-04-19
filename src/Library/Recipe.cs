@@ -34,5 +34,21 @@ namespace Full_GRASP_And_SOLID.Library
                     $"usando '{step.Equipment.Description}' durante {step.Time}");
             }
         }
+        //Añadi esta responsabilidad a Recipe porque cumple con el patrón Expert ya
+        //que es la clase que tiene la información sobre todos los steps realizados.
+        //Al hacer esto rompemos con el principio SRP pero es necesario hacerlo ya que 
+        //la variable que guarda todos estos steps es privada, osea que no podemos
+        //acceder a esta infromación desde otra clase
+        private double GetProductionCost()
+        {
+            double CostoInsumos = 0;
+            double CostoEquipamiento = 0;
+            foreach (Step step in this.steps)
+            {
+                CostoInsumos += step.Input.UnitCost * step.Quantity; //Costo insumos
+                CostoEquipamiento += step.Equipment.HourlyCost * (step.Time/60); //Costo equipamiento
+            }
+            return CostoInsumos + CostoEquipamiento;
+        }
     }
 }
