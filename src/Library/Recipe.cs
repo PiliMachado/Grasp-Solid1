@@ -33,6 +33,7 @@ namespace Full_GRASP_And_SOLID.Library
                 Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
                     $"usando '{step.Equipment.Description}' durante {step.Time}");
             }
+            Console.WriteLine($"Costo {this.GetProductionCost()}");
         }
         //Añadi esta responsabilidad a Recipe porque cumple con el patrón Expert ya
         //que es la clase que tiene la información sobre todos los steps realizados.
@@ -46,7 +47,7 @@ namespace Full_GRASP_And_SOLID.Library
             foreach (Step step in this.steps)
             {
                 CostoInsumos += step.Input.UnitCost * step.Quantity; //Costo insumos
-                CostoEquipamiento += step.Equipment.HourlyCost * (step.Time/60); //Costo equipamiento
+                CostoEquipamiento += step.Equipment.HourlyCost * (step.Time/3600); //Costo equipamiento
             }
             return CostoInsumos + CostoEquipamiento;
         }
